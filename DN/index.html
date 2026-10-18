@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para El Amor De Mi Vida ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amor: {
+                            100: '#ffe4e6', 200: '#fecdd3', 400: '#fb7185',
+                            600: '#e11d48', 800: '#9f1239', 900: '#881337',
+                        }
+                    },
+                    fontFamily: {
+                        dancing: ['Dancing Script', 'cursive'],
+                        greatvibes: ['Great Vibes', 'cursive'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #2b030d 0%, #4a0e17 35%, #881337 70%, #4c0519 100%);
+            color: #fff;
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+        }
+
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp linear infinite;
+            filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.6));
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        .photo-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 192, 203, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 182, 193, 0.15);
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 105, 180, 0.8);
+            box-shadow: 0 20px 40px rgba(225, 29, 72, 0.4), 0 0 20px rgba(255, 105, 180, 0.6);
+        }
+
+        /* --- ESTILO SLIDER TIPO CAPCUT PREMIUM --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 28rem;
+            margin: 0 auto;
+            padding: 0 3.5rem;
+        }
+        @media (min-width: 768px) {
+            .slider-container {
+                max-width: 36rem;
+                padding: 0 4.5rem;
+            }
+        }
+        
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: grab;
+            touch-action: pan-y;
+        }
+        .slider-track:active {
+            cursor: grabbing;
+        }
+        
+        .slide-item {
+            min-width: 100%;
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 45%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(225, 29, 72, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 192, 203, 0.4);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(225, 29, 72, 0.5);
+        }
+        .nav-arrow:hover {
+            background: rgba(225, 29, 72, 1);
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 6px 25px rgba(255, 105, 180, 0.7);
+        }
+        .nav-arrow.prev { left: 0; }
+        .nav-arrow.next { right: 0; }
+        
+        @media (min-width: 768px) {
+            .nav-arrow { width: 52px; height: 52px; font-size: 1.2rem; }
+            .nav-arrow.prev { left: -10px; }
+            .nav-arrow.next { right: -10px; }
+        }
+        /* ----------------------------------------------- */
+
+        .envelope-wrapper { perspective: 1000px; }
+
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #9f1239;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 640px) {
+            .envelope { width: 420px; height: 270px; }
+        }
+
+        .envelope:hover { transform: scale(1.03); }
+
+        .flap {
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 130px solid #be123c;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 3;
+        }
+
+        @media (min-width: 640px) {
+            .flap { border-left-width: 210px; border-right-width: 210px; border-top-width: 160px; }
+        }
+
+        .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
+
+        .letter {
+            position: absolute;
+            bottom: 10px; left: 5%;
+            width: 90%; height: 90%;
+            background: #fff0f3;
+            color: #881337;
+            padding: 20px;
+            border-radius: 6px;
+            transition: all 0.6s ease;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            z-index: 2;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-130px);
+            height: 320px;
+            z-index: 4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow-y: auto;
+        }
+
+        @media (min-width: 640px) {
+            .envelope.open .letter { transform: translateY(-160px); height: 380px; }
+        }
+
+        .glow-text { text-shadow: 0 0 10px rgba(255, 182, 193, 0.8), 0 0 20px rgba(225, 29, 72, 0.6); }
+
+        .letter::-webkit-scrollbar { width: 5px; }
+        .letter::-webkit-scrollbar-thumb { background: #fb7185; border-radius: 10px; }
+    </style>
+</head>
+<body class="relative">
+
+    <div id="hearts-container"></div>
+
+    <!-- Elemento de Audio Oculto -->
+    <audio id="bg-music" loop>
+        <source src="audio/La La Love You, Axolotes Mexicanos - El Fin Del Mundo (Letra_Lyrics).mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Contenedor Principal -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-8 flex flex-col items-center">
+        
+        <!-- Botón de Música -->
+        <div class="fixed top-4 right-4 z-50">
+            <button id="music-toggle" class="bg-amor-600/80 hover:bg-amor-600 backdrop-blur-md text-white p-3 md:px-5 md:py-3 rounded-full shadow-lg flex items-center space-x-2 border border-pink-300/30 transition-all duration-300 transform hover:scale-105">
+                <i id="music-icon" class="fas fa-music text-lg animate-bounce"></i>
+                <span id="music-text" class="hidden md:inline font-semibold text-sm">Música Romántica</span>
+            </button>
+        </div>
+
+        <!-- Encabezado -->
+        <header class="text-center my-8 md:my-12">
+            <span class="text-amor-200 text-sm md:text-lg font-medium tracking-widest uppercase bg-amor-900/50 px-4 py-1.5 rounded-full border border-amor-400/30">
+                ✨ Un regalo del corazón ✨
+            </span>
+            <h1 class="text-4xl md:text-7xl font-bold font-dancing text-pink-200 glow-text mt-4 mb-2">
+                Para El Amor De Mi Vida
+            </h1>
+            <p class="text-base md:text-xl text-pink-100/90 font-light max-w-2xl mx-auto">
+                Cada segundo a tu lado es una hermosa aventura. Gracias por existir y llenar mis días de tanta luz y alegría.
+            </p>
+        </header>
+
+        <!-- Contador de Tiempo Juntos -->
+        <section class="w-full max-w-4xl bg-black/30 backdrop-blur-md rounded-2xl p-6 border border-pink-500/20 shadow-2xl mb-16 text-center">
+            <h2 class="text-2xl md:text-3xl font-dancing text-pink-300 mb-4">
+                <i class="fas fa-heart text-amor-400 mr-2 animate-pulse"></i> Nuestro Tiempo Juntos <i class="fas fa-heart text-amor-400 ml-2 animate-pulse"></i>
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
+                <div class="bg-amor-900/60 p-4 rounded-xl border border-pink-400/20">
+                    <span id="days" class="text-3xl md:text-5xl font-bold text-pink-200">0</span>
+                    <p class="text-xs md:text-sm text-pink-300/80 mt-1 uppercase tracking-wider">Días</p>
+                </div>
+                <div class="bg-amor-900/60 p-4 rounded-xl border border-pink-400/20">
+                    <span id="hours" class="text-3xl md:text-5xl font-bold text-pink-200">0</span>
+                    <p class="text-xs md:text-sm text-pink-300/80 mt-1 uppercase tracking-wider">Horas</p>
+                </div>
+                <div class="bg-amor-900/60 p-4 rounded-xl border border-pink-400/20">
+                    <span id="minutes" class="text-3xl md:text-5xl font-bold text-pink-200">0</span>
+                    <p class="text-xs md:text-sm text-pink-300/80 mt-1 uppercase tracking-wider">Minutos</p>
+                </div>
+                <div class="bg-amor-900/60 p-4 rounded-xl border border-pink-400/20">
+                    <span id="seconds" class="text-3xl md:text-5xl font-bold text-pink-200">0</span>
+                    <p class="text-xs md:text-sm text-pink-300/80 mt-1 uppercase tracking-wider">Segundos</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: Solo Video Centrado -->
+        <section class="w-full max-w-4xl mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-5xl font-dancing text-pink-200 glow-text">
+                    Nuestra Historia 🎥
+                </h2>
+                <p class="text-pink-100/80 text-sm md:text-base mt-2">
+                    Un rincón especial con nuestros mejores recuerdos
+                </p>
+            </div>
+            
+            <div class="flex justify-center w-full">
+                <div class="photo-card rounded-2xl p-3 md:p-4 w-full max-w-3xl">
+                    <video class="w-full rounded-xl shadow-lg outline-none" muted autoplay loop playsinline poster="assets/images/poster1.jpg">
+                        <source src="video/video1.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de video.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería de Recuerdos (SLIDER INTERACTIVO CON FLECHAS) -->
+        <section class="w-full mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-5xl font-dancing text-pink-200 glow-text">
+                    Pequeños Detalles, Gran Amor
+                </h2>
+                <p class="text-pink-100/80 text-sm md:text-base mt-2">
+                    Desliza o usa las flechas para ver nuestros momentos ❤️
+                </p>
+            </div>
+
+            <div class="slider-container">
+                <!-- Flecha Izquierda -->
+                <button id="prevSlide" class="nav-arrow prev" aria-label="Foto anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Pista del Slider -->
+                <div class="overflow-hidden rounded-2xl">
+                    <div id="sliderTrack" class="slider-track">
+                        
+                        <!-- Foto 1 -->
+                        <div class="slide-item">
+                            <div class="photo-card rounded-2xl p-3 flex flex-col items-center">
+                                <div class="relative w-full h-80 md:h-96 rounded-xl overflow-hidden shadow-md">
+                                    <img src="assets/images/imagen1.jpeg" alt="Foto 1" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800'">
+                                </div>
+                                <span class="font-greatvibes text-3xl md:text-4xl text-pink-300 mt-4 text-center">Amor Eterno</span>
+                                <p class="text-xs md:text-sm text-pink-100/80 text-center font-light px-2 mt-2">"En tus ojos encontré mi lugar favorito en el mundo entero."</p>
+                            </div>
+                        </div>
+
+                        <!-- Foto 2 -->
+                        <div class="slide-item">
+                            <div class="photo-card rounded-2xl p-3 flex flex-col items-center">
+                                <div class="relative w-full h-80 md:h-96 rounded-xl overflow-hidden shadow-md">
+                                    <img src="assets/images/foto2.jpg" alt="Foto 2" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=800'">
+                                </div>
+                                <span class="font-greatvibes text-3xl md:text-4xl text-pink-300 mt-4 text-center">Cómplices</span>
+                                <p class="text-xs md:text-sm text-pink-100/80 text-center font-light px-2 mt-2">"Mi sonrisa preferida es la que nace cuando te pienso."</p>
+                            </div>
+                        </div>
+
+                        <!-- Foto 3 -->
+                        <div class="slide-item">
+                            <div class="photo-card rounded-2xl p-3 flex flex-col items-center">
+                                <div class="relative w-full h-80 md:h-96 rounded-xl overflow-hidden shadow-md">
+                                    <img src="assets/images/foto3.jpg" alt="Foto 3" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800'">
+                                </div>
+                                <span class="font-greatvibes text-3xl md:text-4xl text-pink-300 mt-4 text-center">Mi Destino</span>
+                                <p class="text-xs md:text-sm text-pink-100/80 text-center font-light px-2 mt-2">"Si tuviera que volver a comenzar mi vida, te buscaría mucho antes."</p>
+                            </div>
+                        </div>
+
+                        <!-- Foto 4 -->
+                        <div class="slide-item">
+                            <div class="photo-card rounded-2xl p-3 flex flex-col items-center">
+                                <div class="relative w-full h-80 md:h-96 rounded-xl overflow-hidden shadow-md">
+                                    <img src="assets/images/foto4.jpg" alt="Foto 4" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800'">
+                                </div>
+                                <span class="font-greatvibes text-3xl md:text-4xl text-pink-300 mt-4 text-center">Juntos Siempre</span>
+                                <p class="text-xs md:text-sm text-pink-100/80 text-center font-light px-2 mt-2">"Caminar de tu mano es el camino que siempre quiero recorrer."</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Flecha Derecha -->
+                <button id="nextSlide" class="nav-arrow next" aria-label="Foto siguiente">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Indicadores (Puntos) -->
+                <div id="sliderDots" class="flex justify-center gap-3 mt-8"></div>
+            </div>
+        </section>
+
+        <!-- Carta de Amor Interactiva -->
+        <section class="w-full flex flex-col items-center my-12">
+            <h2 class="text-3xl md:text-4xl font-dancing text-pink-200 mb-6 glow-text text-center">
+                Una Carta Especial Para Ti 💌
+            </h2>
+            <p class="text-pink-200/80 text-sm mb-8 text-center">Haz clic en el sobre para leer un mensaje especial</p>
+
+            <div class="envelope-wrapper my-6">
+                <div id="envelope" class="envelope" onclick="toggleEnvelope()">
+                    <div class="flap"></div>
+                    <div class="letter">
+                        <h3 id="letter-title" class="font-dancing text-2xl md:text-3xl text-amor-800 font-bold mb-3">Mi Princesa Hermosa ❤️</h3>
+                        <p id="letter-body" class="text-xs md:text-sm text-gray-700 leading-relaxed italic mb-4">
+                            "Querida mía, no hay palabras suficientes para expresarte lo mucho que significas para mí. Desde que llegaste a mi vida, todo tiene más color, más alegría y más sentido. Gracias por cada sonrisa, por cada abrazo y por ser esa persona tan increíble que ilumina mis días. Te amo hoy, mañana y siempre."
+                        </p>
+                        <span id="letter-sign" class="font-greatvibes text-2xl md:text-3xl text-amor-600">Por siempre tuyo/a</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-16 text-center text-pink-200/60 text-xs md:text-sm pb-8">
+            <p>Hecho con todo mi amor especialmente para ti ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        /* --- 1. Generador de Corazones Flotantes --- */
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            if(!container) return;
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            const icons = ['❤️', '💖', '💗', '💕', '✨', '🌸'];
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 12) + 'px';
+            heart.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            container.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 10000);
+        }
+        setInterval(createHeart, 350);
+
+        document.addEventListener('click', (e) => {
+            if(e.target.closest('button') || e.target.closest('video')) return;
+            for(let i = 0; i < 6; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'fixed pointer-events-none z-50 text-xl animate-ping';
+                heart.style.left = (e.clientX + (Math.random() * 40 - 20)) + 'px';
+                heart.style.top = (e.clientY + (Math.random() * 40 - 20)) + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 800);
+            }
+        });
+
+        /* --- 2. Contador de Tiempo Juntos --- */
+        const startDate = new Date(2026, 9, 1); 
+        
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            
+            if (diff < 0) {
+                document.getElementById('days').innerText = "0";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        /* --- 3. Slider de Fotos con Flechas y Swipe (Estilo CapCut) --- */
+        const sliderTrack = document.getElementById('sliderTrack');
+        const slides = sliderTrack.children;
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        const dotsContainer = document.getElementById('sliderDots');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Crear puntos indicadores
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = `h-2 rounded-full transition-all duration-300 ${i === 0 ? 'w-6 bg-pink-300' : 'w-2 bg-pink-300/40 hover:bg-pink-300/70'}`;
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+        const dots = dotsContainer.children;
+
+        function updateSlider() {
+            sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+            for (let i = 0; i < totalSlides; i++) {
+                if (i === currentIndex) {
+                    dots[i].className = 'h-2 w-6 rounded-full bg-pink-300 transition-all duration-300';
+                } else {
+                    dots[i].className = 'h-2 w-2 rounded-full bg-pink-300/40 hover:bg-pink-300/70 transition-all duration-300';
+                }
+            }
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            if (currentIndex < 0) currentIndex = totalSlides - 1;
+            if (currentIndex >= totalSlides) currentIndex = 0;
+            updateSlider();
+        }
+
+        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+        // Soporte para deslizar con el dedo (Touch/Swipe en móviles)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        sliderTrack.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        sliderTrack.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) goToSlide(currentIndex + 1); // Deslizar a la izquierda
+            if (touchEndX > touchStartX + swipeThreshold) goToSlide(currentIndex - 1); // Deslizar a la derecha
+        }
+
+        /* --- 4. Carta con Texto Dinámico --- */
+        const cartas = [
+            { titulo: "Mi Princesa Hermosa ❤️", cuerpo: "Querida mía, no hay palabras suficientes para expresarte lo mucho que significas para mí. Desde que llegaste a mi vida, todo tiene más color, más alegría y más sentido. Gracias por cada sonrisa, por cada abrazo y por ser esa persona tan increíble que ilumina mis días. Te amo hoy, mañana y siempre.", firma: "Por siempre tuyo/a" },
+            { titulo: "Mi Amor, Mi Todo 💖", cuerpo: "Cada día que pasa me doy cuenta de la suerte que tengo de compartir mi vida contigo. Eres mi refugio, mi paz y mi mayor aventura. Prometo amarte en los días soleados y en los tormentosos, porque contigo, absolutamente todo es mejor.", firma: "Con todo mi amor" },
+            { titulo: "Para la Dueña de mi Corazón 💌", cuerpo: "Si pudiera pedir un deseo, sería volver a encontrarte en cada vida que tenga. Gracias por ser mi compañera, mi confidente y mi mejor amiga. Te amo más de lo que las palabras jamás podrían expresar.", firma: "Eternamente enamorado/a" },
+            { titulo: "Mi Razón de Sonreír 🌹", cuerpo: "No importa cuánto tiempo pase, mi corazón siempre latirá al mismo ritmo acelerado cuando te veo. Eres el regalo más hermoso que la vida me ha dado. Gracias por existir y por elegirme cada día.", firma: "Tuyo/a hoy y siempre" }
+        ];
+        let cartaIndex = 0;
+
+        function toggleEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const isOpening = !envelope.classList.contains('open');
+            if (isOpening) {
+                cartaIndex = (cartaIndex + 1) % cartas.length;
+                const carta = cartas[cartaIndex];
+                document.getElementById('letter-title').innerText = carta.titulo;
+                document.getElementById('letter-body').innerText = `"${carta.cuerpo}"`;
+                document.getElementById('letter-sign').innerText = carta.firma;
+            }
+            envelope.classList.toggle('open');
+        }
+
+        /* --- 5. Reproductor de Música Local con Autoplay + Fallback --- */
+        const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.className = "fas fa-music text-lg animate-bounce";
+                musicText.innerText = "Música Romántica";
+                isPlaying = false;
+            } else {
+                bgMusic.play().catch(e => console.log("Esperando interacción del usuario"));
+                musicIcon.className = "fas fa-heart text-pink-300 animate-pulse";
+                musicText.innerText = "Reproduciendo ❤️";
+                isPlaying = true;
+            }
+        }
+
+        musicBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMusic();
+        });
+
+        window.addEventListener('load', () => {
+            bgMusic.volume = 0.4;
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicIcon.className = "fas fa-heart text-pink-300 animate-pulse";
+                musicText.innerText = "Reproduciendo ❤️";
+            }).catch(() => {
+                document.addEventListener('click', function autoStart() {
+                    if (!isPlaying) {
+                        toggleMusic();
+                    }
+                    document.removeEventListener('click', autoStart);
+                }, { once: true });
+            });
+        });
+    </script>
+</body>
+</html>
